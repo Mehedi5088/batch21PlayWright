@@ -1,8 +1,9 @@
-// @ts-check
-class SignUpPage {
+import { Base } from './Base.js';
+
+class SignUpPage extends Base {
   constructor(page) {
-    this.page = page;
-    this.pageUrl = 'https://demowebshop.tricentis.com/';
+    super(page);
+
     this.registerLink = page.locator('a[href="/register"]');
     this.genderRadioButton = page.locator('#gender-male');
     this.firstNameInput = page.locator('#FirstName');
@@ -11,22 +12,15 @@ class SignUpPage {
     this.passwordInput = page.locator('#Password');
     this.confirmPasswordInput = page.locator('#ConfirmPassword');
     this.registerButton = page.locator('#register-button');
-  }
-
-  async pageOpen() {
-      await this.page.goto(this.pageUrl, {
-            waitUntil: 'domcontentloaded',
-            timeout: 60000
-        });
-    // await this.page.goto("https://demowebshop.tricentis.com/");
+    this.varifyLogin = page.locator('a[href="/logout"]');
   }
 
   async clickRegisterLink() {
-    await this.registerLink.click();
+    await this.clickElement(this.registerLink);
   }
 
   async clickGenderRadioButton() {
-    await this.genderRadioButton.click();
+    await this.clickElement(this.genderRadioButton);
   }
 
   async enterFirstName(firstName) {
@@ -46,7 +40,7 @@ class SignUpPage {
   }
 
   async clickRegisterButton() {
-    await this.registerButton.click();
+    await this.clickElement(this.registerButton);
   }
 
 }
